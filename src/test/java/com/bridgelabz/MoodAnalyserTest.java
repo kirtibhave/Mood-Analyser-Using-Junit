@@ -147,6 +147,20 @@ public class MoodAnalyserTest {
             Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD, e.type);
         }
     }
+
+    //6.1
+    @Test
+    public void givenHappyMessage_WhenProper_ShouldReturnHappy() {
+        try {
+            MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodMethod("I am in happy mood");
+            String mood = MoodAnalyserUsingReflection.invokeMoodAnalyser(moodAnalyser, "analyseMood");
+            Assert.assertEquals("Happy",mood);
+        }
+        catch (MoodAnalysisException e){
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD,e.type);
+        }
+    }
+
 }
 
 

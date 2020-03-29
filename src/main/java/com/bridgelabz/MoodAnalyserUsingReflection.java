@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class MoodAnalyserUsingReflection {
     //Reflection For Default Constructor
@@ -65,6 +66,45 @@ public class MoodAnalyserUsingReflection {
         }
         return null;
     }
+
+    //6.1
+    public static MoodAnalyser createMoodMethod(String message) {
+        Constructor<?> moodConstructor = null;
+        try {
+            //   Constructor<?> constructor = Class.forName("com.bridgelabz.MoodAnalyser").getConstructor(String.class);
+            moodConstructor = Class.forName("com.bridgelabz.MoodAnalyser").getConstructor(String.class);
+            Object obj1 = moodConstructor.newInstance(message);
+            return (MoodAnalyser) obj1;
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //invoke method(6.0)
+    public static String invokeMoodAnalyser(MoodAnalyser o1, String methodName) {
+        try {
+            Method declareMethod = o1.getClass().getDeclaredMethod(methodName);
+            return (String) declareMethod.invoke(o1);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalysisException(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD, "method not found");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 }
 
 

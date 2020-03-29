@@ -26,11 +26,11 @@ public class MoodAnalyserTest {
 
     //2.1
     @Test
-    public void givenNullMessage_ShouldReturnHappy()  {
+    public void givenNullMessage_ShouldReturnHappy() {
         try {
             MoodAnalyser moodAnalysis = new MoodAnalyser("NULL");
             String mood = moodAnalysis.analyseMood();
-            Assert.assertEquals("Happy",mood);
+            Assert.assertEquals("Happy", mood);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,9 +116,9 @@ public class MoodAnalyserTest {
         }
     }
 
-   //4.3
+    //4.3
     @Test
-    public void givenMoodAnalyserClass_WhenConstructorIsNotProper(){
+    public void givenMoodAnalyserClass_WhenConstructorIsNotProper() {
         try {
             Constructor<?> moodAnalyser = new MoodAnalyserUsingReflection().getConstructor("com.bridgelabz.MoodAnalyser", int.class);
 
@@ -127,7 +127,7 @@ public class MoodAnalyserTest {
         }
     }
 
-   //5.1
+    //5.1
     @Test
     public void givenMoodAnalyserClass_WhenClassIsFound_UsingParameterisedConstructor() {
         try {
@@ -154,14 +154,26 @@ public class MoodAnalyserTest {
         try {
             MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodMethod("I am in happy mood");
             String mood = MoodAnalyserUsingReflection.invokeMoodAnalyser(moodAnalyser, "analyseMood");
-            Assert.assertEquals("Happy",mood);
-        }
-        catch (MoodAnalysisException e){
-            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD,e.type);
+            Assert.assertEquals("Happy", mood);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD, e.type);
         }
     }
 
+
+    //6.2
+    @Test
+    public void givenFieldNameAndItsValue_WhenProper_ShouldReturnHappy() {
+        try {
+            MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodMethod("I am in happy mood");
+            String mood = MoodAnalyserUsingReflection.invokeMoodAnalyser(moodAnalyser, "analyseMookjd");
+            // Assert.assertEquals("Happy",mood);
+        } catch (MoodAnalysisException e) {
+            e.printStackTrace();
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD, e.type);
+        }
+
+    }
+
 }
-
-
 

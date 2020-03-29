@@ -104,6 +104,7 @@ public class MoodAnalyserTest {
 
     }
 
+    //4.2
     @Test
     public void givenMoodAnalyserClass_When_ClassNameIsImproper() {
         try {
@@ -115,6 +116,7 @@ public class MoodAnalyserTest {
         }
     }
 
+   //4.3
     @Test
     public void givenMoodAnalyserClass_WhenConstructorIsNotProper(){
         try {
@@ -124,5 +126,28 @@ public class MoodAnalyserTest {
             Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD, e.type);
         }
     }
+
+   //5.1
+    @Test
+    public void givenMoodAnalyserClass_WhenClassIsFound_UsingParameterisedConstructor() {
+        try {
+            MoodAnalyserUsingReflection.createMoodAnalyser("com.bridghgelabz.MoodAnygtgalyser");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.CLASS_NOT_FOUND, e.type);
+        }
+    }
+
+    //5.2
+    @Test
+    public void givenMoodAnalyserClass_WhenConstructorIsNotProperUsingParameterisedConstructor() {
+        try {
+            Constructor<?> moodAnalyser = new MoodAnalyserUsingReflection().getConstructor("com.bridgelabz.MoodAnalyser", int.class);
+
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_METHOD, e.type);
+        }
+    }
 }
+
+
 

@@ -34,6 +34,7 @@ public class MoodAnalyserTest {
 
     }
 
+    //3.1
     @Test
     public void givenNullMessage_ShouldThrowException() throws MoodAnalysisException {
         try {
@@ -42,6 +43,28 @@ public class MoodAnalyserTest {
             Assert.assertEquals("Happy", mood);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    //3.2
+    @Test
+    public void givenMood_whenNull_shouldReturnCustomMessage() {
+        try {
+            MoodAnalyser moodAnalysis = new MoodAnalyser("");
+            String mood = moodAnalysis.analyseMood();
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.EMPTY_MESSAGE, e.type);
+        }
+    }
+
+    //3.2
+    @Test
+    public void givenMood_whenEmpty_shouldReturnCustomMessage() {
+        try {
+            MoodAnalyser moodAnalysis = new MoodAnalyser(null);
+            String mood = moodAnalysis.analyseMood();
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NULL_MESSAGE, e.type);
         }
     }
 }

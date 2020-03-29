@@ -13,10 +13,24 @@ public class MoodAnalyserTest {
         Assert.assertEquals("Sad", mood);
     }
 
+    //1.2
     @Test
     public void givenMessage_WhenProper_ShouldReturnHappy() {
         MoodAnalyser moodAnalysis = new MoodAnalyser("I am in happy mood");
         String mood = moodAnalysis.analyseMood();
         Assert.assertEquals("Happy", mood);
+    }
+
+    //2.1
+    @Test
+    public void givenNullMessage_ShouldReturnHappy()  {
+        try {
+            MoodAnalyser moodAnalysis = new MoodAnalyser("NULL");
+            String mood = moodAnalysis.analyseMood();
+            Assert.assertEquals("Happy",mood);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

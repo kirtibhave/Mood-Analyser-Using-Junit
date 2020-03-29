@@ -183,5 +183,15 @@ public class MoodAnalyserTest {
             Assert.assertEquals("Happy",mood);
         }
 
+    //7.2
+    @Test
+    public void givenFieldNameAndItsValue_WhenFieldNotProper_ShouldThrowException () {
+        try {
+            MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodAnalyzerDefault();
+            String mood = MoodAnalyserUsingReflection.setField("message", "Happy");
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_FIELD, e.type);
+        }
+    }
 }
 

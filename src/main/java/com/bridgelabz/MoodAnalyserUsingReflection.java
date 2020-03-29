@@ -113,20 +113,18 @@ public class MoodAnalyserUsingReflection {
                 field.setAccessible(true);
                 field.set(obj,message);
                 return(String) obj.getClass().getDeclaredMethod("analyseMood").invoke(obj);
+            } catch (NoSuchFieldException | IllegalAccessException  e) {
+                throw new MoodAnalysisException(MoodAnalysisException.EnumExceptionType.NO_SUCH_FIELD,"method not found");
+            }catch (NoSuchMethodException e){
+                e.printStackTrace();
+            }
+            catch (InvocationTargetException e) {
+                throw new MoodAnalysisException(MoodAnalysisException.EnumExceptionType.INVOCATION_ISSUE, "invocation issue");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (InstantiationException e) {
                 e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                throw new MoodAnalysisException(MoodAnalysisException.EnumExceptionType.INVOCATION_ISSUE,"method not found");
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NoSuchFieldException e) {
-                throw new MoodAnalysisException(MoodAnalysisException.EnumExceptionType.NO_SUCH_FIELD,"method not found");
             }
-
             return null;
         }
     }

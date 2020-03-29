@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -105,7 +106,32 @@ public class MoodAnalyserUsingReflection {
         return null;
     }
 
-}
+        public static String setField(String fieldName,String message) {
+            try {
+                Object obj = Class.forName("com.bridgelabz.MoodAnalyser").getConstructor().newInstance();
+                Field field = obj.getClass().getDeclaredField(fieldName);
+                field.setAccessible(true);
+                field.set(obj,message);
+                return(String) obj.getClass().getDeclaredMethod("analyseMood").invoke(obj);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                throw new MoodAnalysisException(MoodAnalysisException.EnumExceptionType.INVOCATION_ISSUE,"method not found");
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                throw new MoodAnalysisException(MoodAnalysisException.EnumExceptionType.NO_SUCH_FIELD,"method not found");
+            }
+
+            return null;
+        }
+    }
+
+
 
 
 

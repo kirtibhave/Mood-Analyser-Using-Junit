@@ -175,5 +175,13 @@ public class MoodAnalyserTest {
 
     }
 
+    //7.1
+    @Test
+    public void givenFieldNameAndValue_whenProper_shouldReturnValue() {
+        MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodAnalyzer("I am in happy mood");
+            String mood = MoodAnalyserUsingReflection.setField("message","Happy");
+            Assert.assertEquals("Happy",mood);
+        }
+
 }
 

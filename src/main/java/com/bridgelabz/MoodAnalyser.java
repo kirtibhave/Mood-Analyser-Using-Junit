@@ -1,11 +1,19 @@
 package com.bridgelabz;
 
 public class MoodAnalyser {
-    public String analyseMood(String message){
-        if (message.contains("Happy"))
+
+    String message;
+    public MoodAnalyser() {
+    }
+
+    public MoodAnalyser(String message) {
+        this.message = message;
+    }
+
+    public String analyseMood() {
+        if (message.contains("happy"))
             return "Happy";
         else
             return "Sad";
-        }
     }
 }

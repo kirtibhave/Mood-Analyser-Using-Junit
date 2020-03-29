@@ -179,13 +179,13 @@ public class MoodAnalyserTest {
     @Test
     public void givenFieldNameAndValue_whenProper_shouldReturnValue() {
         MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodAnalyzer("I am in happy mood");
-            String mood = MoodAnalyserUsingReflection.setField("message","Happy");
-            Assert.assertEquals("Happy",mood);
-        }
+        String mood = MoodAnalyserUsingReflection.setField("message", "Happy");
+        Assert.assertEquals("Happy", mood);
+    }
 
     //7.2
     @Test
-    public void givenFieldNameAndItsValue_WhenFieldNotProper_ShouldThrowException () {
+    public void givenFieldNameAndItsValue_WhenFieldNotProper_ShouldThrowException() {
         try {
             MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodAnalyzerDefault();
             String mood = MoodAnalyserUsingReflection.setField("message", "Happy");
@@ -193,5 +193,15 @@ public class MoodAnalyserTest {
             Assert.assertEquals(MoodAnalysisException.EnumExceptionType.NO_SUCH_FIELD, e.type);
         }
     }
-}
 
+    //7.3
+    @Test
+    public void givenFieldNameAndItsValue_ShouldThrowMoodAnalyserException() {
+        try {
+            MoodAnalyser moodAnalyser = MoodAnalyserUsingReflection.createMoodAnalyzerDefault();
+            String mood = MoodAnalyserUsingReflection.setField("messagefg", null);
+        } catch (MoodAnalysisException e) {
+            Assert.assertEquals(MoodAnalysisException.EnumExceptionType.INVOCATION_ISSUE, e.type);
+        }
+    }
+}
